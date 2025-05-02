@@ -1,0 +1,91 @@
+create database sql_practice;
+use sql_practice;
+CREATE table Person(
+ID int,
+FIRSTNAME varchar(255),
+STATE varchar(255),
+GENDER varchar(255));
+
+INSERT INTO Person(ID,FIRSTNAME,STATE,GENDER)
+VALUES
+(1,'SACHIN','KERALA','MALE'),
+(2,'AYUSH','ODISSA','MALE'),
+(3,'RITA','DELHI','FEMALE'),
+(4,'WILLIAM','KERALA','MALE');
+
+SELECT * FROM Person;
+
+INSERT INTO Person(ID,FIRSTNAME,STATE,GENDER)
+VALUES
+(5,'NIZWAN','KERALA','MALE'),
+(6,'PANKAJ','MADHYA PRADESH','MALE');
+
+DELETE FROM Person where id = 5;
+Update Person SET STATE = 'TAMIL NADU' where id = 5;
+
+CREATE TABLE StateDetails (
+    STATE VARCHAR(50) PRIMARY KEY,
+    DISTRICT VARCHAR(50),
+    LANG VARCHAR(50)
+);
+
+INSERT INTO StateDetails(STATE,DISTRICT,LANG)
+VALUES
+('KERALA','PATAHANAMTHITTA','MALAYALAM'),
+('ODISSA','BHUBHANESWAR','ODIA'),
+('MADHYA PRADESH','BHOPAL','HINDI'),
+('DELHI','RK PURAM','HIndI');
+
+SELECT * FROM StateDetails;
+
+SELECT FIRSTNAME,GENDER FROM Person
+INNER JOIN StateDetails
+on Person.STATE = StateDetails.STATE;
+
+CREATE table Grading(
+ID int Auto_increment primary key,
+FIRSTNAME varchar(255),
+MARKS int);
+
+INSERT INTO Grading(FIRSTNAME,MARKS)
+VALUES
+('Sachin',75),
+('AYUSH',55),
+('RITA',89),
+('WILLIAM',80),
+('PANKAJ',60),
+('VELMA',95),
+('SHARMA',99);
+
+SELECT * from GRADING;
+
+
+SELECT count(MARKS) FROM Grading WHERE MARKS>= 80 ;
+SELECT min(MARKS) from Grading;
+SELECT max(MARKS) from Grading;
+SELECT avg(MARKS) from Grading;
+
+SELECT * FROM Person
+WHERE STATE in ('Kerala');
+
+SELECT * From Person;
+
+SELECT * FROM Person
+WHERE ID between 2 AND 4;
+
+SELECT FIRSTNAME from Person
+UNION
+SELECT FIRSTNAME from GRADING;
+
+SELECT * from GRADING;
+
+SELECT FIRSTNAME,max(MARKS) from Grading
+Group by FIRSTNAME; 
+
+SELECT  * FROM GRADING
+WHERE MARKS = (SELECT max(marks) from GRADING
+WHERE MARKS < (SELECT max(marks) from GRADING));
+
+
+
+
